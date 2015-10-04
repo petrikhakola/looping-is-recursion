@@ -22,20 +22,38 @@
    :else false))
 
 (defn find-first-index [pred a-seq]
-
-
-
-)
+  (loop [p pred seq a-seq counter 0]
+    (cond 
+     (empty? seq) nil
+     (p (first seq)) counter
+     :else (recur p (rest seq) (inc counter)))))
 
 (defn avg [a-seq]
-  -1)
+  (loop [sum 0 counter 0 seq a-seq]
+    (cond 
+     (empty? seq) (/ sum counter)
+     :else (recur (+ sum (first seq)) (inc counter) (rest seq)))))
+
+(defn toggle [a-set elem]
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn parity [a-seq]
-  ":(")
+  (loop [pset #{} seq a-seq]
+    (cond
+     (empty? seq) pset
+     :else (recur (toggle pset (first seq)) (rest seq)))))
 
 (defn fast-fibo [n]
-  ":(")
+  (loop [i 0 f1 0 f2 1]
+    (cond
+     (= n i) f1
+     :else (recur (inc i) f2 (+ f1 f2)))))
 
 (defn cut-at-repetition [a-seq]
-  [":("])
+  [":("]
+
+  
+)
 
