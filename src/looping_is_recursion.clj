@@ -52,8 +52,8 @@
      :else (recur (inc i) f2 (+ f1 f2)))))
 
 (defn cut-at-repetition [a-seq]
-  [":("]
-
-  
-)
-
+  (loop [retvec [] refset #{} seq a-seq]
+    (cond
+     (empty? seq) retvec
+     (contains? refset (first seq)) retvec
+     :else (recur (conj retvec (first seq)) (conj refset (first seq)) (rest seq)))))
